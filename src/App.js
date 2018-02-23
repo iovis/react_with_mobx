@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Card from './components/card';
+import CardList from './components/CardList';
 
 class App extends Component {
   render() {
     return (
-      <Card body="This is a test"/>
+      <CardList store={this.props.store}/>
     );
   }
 }
