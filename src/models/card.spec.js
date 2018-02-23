@@ -15,4 +15,10 @@ describe('Card', () => {
     const card = new Card('heyo!');
     expect(card.body).toEqual('heyo!');
   });
+
+  it('generates the coordinates',() => {
+    const card = new Card('heyo!');
+    expect(card.x).toEqual(0);
+    expect(card.y).toEqual(0);
+  });
 });

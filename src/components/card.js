@@ -8,6 +8,8 @@ class Card extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    this.handleDragStart = this.handleDragStart.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
   @action
@@ -15,12 +17,32 @@ class Card extends Component {
     this.props.card.body = event.target.value;
   }
 
+  handleDragStart(event) {
+    this.clientX = event.clientX;
+    this.clientY = event.clientY;
+  }
+
+  @action
+  handleDragEnd(event) {
+    const movedX = event.clientX - this.clientX;
+    const movedY = event.clientY - this.clientY;
+
+    this.props.card.x += movedX;
+    this.props.card.y += movedY;
+  }
+
   render() {
+    const { card } = this.props;
+
     return (
       <textarea
         className="card"
+        draggable="true"
+        style={{left: card.x, top: card.y}}
+        onDragStart={this.handleDragStart}
+        onDragEnd={this.handleDragEnd}
         onChange={this.handleChange}
-        value={this.props.card.body}>
+        value={card.body}>
       </textarea>
     );
   }
