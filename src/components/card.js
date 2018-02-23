@@ -27,8 +27,8 @@ class Card extends Component {
     const movedX = event.clientX - this.clientX;
     const movedY = event.clientY - this.clientY;
 
-    this.props.card.x += movedX;
-    this.props.card.y += movedY;
+    this.props.card.moveX(movedX);
+    this.props.card.moveY(movedY);
   }
 
   render() {
