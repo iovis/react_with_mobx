@@ -1,0 +1,8 @@
+.header__title {
+  text-align: center;
+}
+
+.header__columns {
+  display: flex;
+  justify-content: space-around;
+}
