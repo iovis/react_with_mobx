@@ -9,8 +9,8 @@ class App extends Component {
     return (
       <div className="app">
         <Header />
-        <CardList store={this.props.store}/>
-        <Board />
+        <CardList store={this.props.store} />
+        <Board store={this.props.store} />
       </div>
     );
   }
