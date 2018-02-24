@@ -1,0 +1,10 @@
+.board {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.board__column {
+  border-left: 1px solid black;
+  flex: 1;
+}
