@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
 import icon from '../images/empty.png';
@@ -15,6 +15,7 @@ class Card extends Component {
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleResize    = this.handleResize.bind(this);
     this.moveCard        = this.moveCard.bind(this);
+    this.removeCard      = this.removeCard.bind(this);
   }
 
   @action
@@ -65,26 +66,42 @@ class Card extends Component {
     this.props.card.setHeight(event.target.offsetHeight);
   }
 
+  @action
+  removeCard() {
+    this.props.removeCard(this.props.card.id);
+  }
+
   render() {
     const { card } = this.props;
 
     return (
-      <textarea
-        className="card"
-        draggable="true"
-        style={{
-          width: card.width,
-          height: card.height,
-          transform: `translate(${card.x}px, ${card.y}px)`
-        }}
-        onDragStart={this.handleDragStart}
-        onDrag={this.handleDrag}
-        onDragEnd={this.handleDragEnd}
-        onDragOver={this.handleDragOver}
-        onMouseUp={this.handleResize}
-        onChange={this.handleChange}
-        value={card.body}>
-      </textarea>
+      <Fragment>
+        <textarea
+          className="card"
+          draggable="true"
+          style={{
+            width: card.width,
+            height: card.height,
+            transform: `translate(${card.x}px, ${card.y}px)`
+          }}
+          onDragStart={this.handleDragStart}
+          onDrag={this.handleDrag}
+          onDragEnd={this.handleDragEnd}
+          onDragOver={this.handleDragOver}
+          onMouseUp={this.handleResize}
+          onChange={this.handleChange}
+          value={card.body}>
+        </textarea>
+        <div
+          className="card__close"
+          style={{
+            transform: `translate(${card.x + card.width - 12}px, ${card.y - 12}px)`
+          }}
+          onClick={this.removeCard}
+        >
+          &times;
+        </div>
+      </Fragment>
     );
   }
 }

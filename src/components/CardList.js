@@ -9,7 +9,7 @@ class CardList extends Component {
     return (
       <div className="card-list">
         {this.props.store.cards.map(card => (
-          <Card key={card.id} card={card} />
+          <Card key={card.id} card={card} removeCard={this.props.store.removeCard}/>
         ))}
       </div>
     );

@@ -8,6 +8,10 @@ class Store {
   addCard = (body, x, y, width, height) => {
     this.cards.push(new Card(body, x, y, width, height));
   }
+
+  @action
+  removeCard = (id) => {
+    this.cards = this.cards.filter(card => card.id !== id);
   }
 }
 
