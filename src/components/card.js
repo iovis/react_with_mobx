@@ -13,6 +13,7 @@ class Card extends Component {
     this.handleDragEnd   = this.handleDragEnd.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleResize    = this.handleResize.bind(this);
+    this.moveCard        = this.moveCard.bind(this);
   }
 
   @action
@@ -36,10 +37,10 @@ class Card extends Component {
   }
 
   handleDrag(event) {
-    const x = event.clientX - this.offsetX;
-    const y = event.clientY - this.offsetY;
+    this.x = event.clientX - this.offsetX;
+    this.y = event.clientY - this.offsetY;
 
-    requestAnimationFrame(this.moveCard.bind(this, x, y));
+    requestAnimationFrame(this.moveCard);
   }
 
   handleDragEnd(event) {
@@ -47,9 +48,9 @@ class Card extends Component {
   }
 
   @action
-  moveCard(x, y) {
-    this.props.card.setX(x);
-    this.props.card.setY(y);
+  moveCard() {
+    this.props.card.setX(this.x);
+    this.props.card.setY(this.y);
   }
 
   handleDragOver(event) {
@@ -73,8 +74,7 @@ class Card extends Component {
         style={{
           width: card.width,
           height: card.height,
-          left: card.x,
-          top: card.y
+          transform: `translate(${card.x}px, ${card.y}px)`
         }}
         onDragStart={this.handleDragStart}
         onDrag={this.handleDrag}
