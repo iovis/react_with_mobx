@@ -5,6 +5,9 @@
 }
 
 .board__column {
-  border-left: 1px solid black;
   flex: 1;
+}
+
+.board__column + .board__column {
+  border-left: 1px solid black;
 }
