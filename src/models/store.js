@@ -5,8 +5,9 @@ class Store {
   @observable cards = [];
 
   @action
-  addCard(body) {
-    this.cards.push(new Card(body));
+  addCard = (body, x, y, width, height) => {
+    this.cards.push(new Card(body, x, y, width, height));
+  }
   }
 }
 
