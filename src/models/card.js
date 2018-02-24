@@ -6,13 +6,17 @@ const MINIMUM_HEIGHT = 50;
 export default class Card {
   id = Date.now();
   @observable body;
-  @observable x = 0;
-  @observable y = 0;
-  @observable width = 100;
-  @observable height = 50;
+  @observable x;
+  @observable y;
+  @observable width;
+  @observable height;
 
-  constructor(body) {
+  constructor(body, x = 0, y = 0, width = MINIMUM_WIDTH * 2, height = MINIMUM_HEIGHT * 2) {
     this.body = body;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
 
   @action
