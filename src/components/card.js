@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
+import icon from '../images/empty.png';
 import './card.css';
 
 @observer
@@ -27,7 +28,7 @@ class Card extends Component {
 
     // Set empty jpeg to hide the ghost image
     const img = new Image();
-    img.src = 'empty.png';
+    img.src = icon;
     event.dataTransfer.setDragImage(img, 0, 0);
 
     // Distance from where the user clicked to
