@@ -16,31 +16,27 @@ export default class Card {
   }
 
   @action
-  moveX(movedX) {
-    this.x += movedX;
-
-    if (this.x < 0) {
-      return this.x = 0;
-    }
+  setX(x) {
+    if (x < 0) return this.x = 0;
 
     // Don't let it go out of bounds
-    if (this.x > window.innerWidth - this.width) {
-      this.x = window.innerWidth - this.width;
+    if (x > window.innerWidth - this.width) {
+      return this.x = window.innerWidth - this.width;
     }
+
+    this.x = x;
   }
 
   @action
-  moveY(movedY) {
-    this.y += movedY;
-
-    if (this.y < 0) {
-      return this.y = 0;
-    }
+  setY(y) {
+    if (y < 0) return this.y = 0;
 
     // Don't let it go out of bounds
-    if (this.y > window.innerHeight - this.height) {
-      this.y = window.innerHeight - this.height;
+    if (y > window.innerHeight - this.height) {
+      return this.y = window.innerHeight - this.height;
     }
+
+    this.y = y;
   }
 
   @action

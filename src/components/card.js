@@ -9,6 +9,7 @@ class Card extends Component {
     super();
 
     this.handleChange    = this.handleChange.bind(this);
+    this.handleDrag      = this.handleDrag.bind(this);
     this.handleDragEnd   = this.handleDragEnd.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleResize    = this.handleResize.bind(this);
@@ -20,27 +21,46 @@ class Card extends Component {
   }
 
   handleDragStart(event) {
-    this.clientX = event.clientX;
-    this.clientY = event.clientY;
+    // Don't show the copy cursor
+    event.dataTransfer.effectAllowed = 'move';
+
+    // Set empty jpeg to hide the ghost image
+    const img = new Image();
+    img.src = 'empty.png';
+    event.dataTransfer.setDragImage(img, 0, 0);
+
+    // Distance from where the user clicked to
+    // our coordinates
+    this.offsetX = event.clientX - this.props.card.x;
+    this.offsetY = event.clientY - this.props.card.y;
+  }
+
+  handleDrag(event) {
+    const x = event.clientX - this.offsetX;
+    const y = event.clientY - this.offsetY;
+
+    requestAnimationFrame(this.moveCard.bind(this, x, y));
+  }
+
+  handleDragEnd(event) {
+    this.handleDrag(event);
   }
 
   @action
-  handleDragEnd(event) {
-    const movedX = event.clientX - this.clientX;
-    const movedY = event.clientY - this.clientY;
+  moveCard(x, y) {
+    this.props.card.setX(x);
+    this.props.card.setY(y);
+  }
 
-    this.props.card.moveX(movedX);
-    this.props.card.moveY(movedY);
+  handleDragOver(event) {
+    // Prevent from resetting event.clientX/Y to zero when finishing drag
+    event.preventDefault();
   }
 
   @action
   handleResize(event) {
     this.props.card.setWidth(event.target.offsetWidth);
     this.props.card.setHeight(event.target.offsetHeight);
-    console.log(`
-      width: ${event.target.offsetWidth}
-      height: ${event.target.offsetHeight}
-    `);
   }
 
   render() {
@@ -57,7 +77,9 @@ class Card extends Component {
           top: card.y
         }}
         onDragStart={this.handleDragStart}
+        onDrag={this.handleDrag}
         onDragEnd={this.handleDragEnd}
+        onDragOver={this.handleDragOver}
         onMouseUp={this.handleResize}
         onChange={this.handleChange}
         value={card.body}>

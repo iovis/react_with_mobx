@@ -28,16 +28,16 @@ describe('Card', () => {
     });
 
     it('properly moves the card', () => {
-      card.moveX(23);
-      card.moveY(32);
+      card.setX(23);
+      card.setY(32);
 
       expect(card.x).toEqual(23);
       expect(card.y).toEqual(32);
     });
 
     it('does not create coordinates lower than 0', () => {
-      card.moveX(-23);
-      card.moveY(-32);
+      card.setX(-23);
+      card.setY(-32);
 
       expect(card.x).toEqual(0);
       expect(card.y).toEqual(0);
@@ -50,8 +50,8 @@ describe('Card', () => {
       window.innerWidth = maxWidth;
       window.innerHeight = maxHeight;
 
-      card.moveX(maxWidth + card.width + 24);
-      card.moveY(maxHeight + card.height + 52);
+      card.setX(maxWidth + card.width + 24);
+      card.setY(maxHeight + card.height + 52);
 
       expect(card.x).toEqual(maxWidth - card.width);
       expect(card.y).toEqual(maxHeight - card.height);
