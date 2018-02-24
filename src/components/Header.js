@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import icon from '../images/rubicon_icon.png';
 import './Header.css';
 
 class Header extends Component {
@@ -6,6 +7,7 @@ class Header extends Component {
     return (
       <div className="header">
         <h1 className="header__title">
+          <img src={icon} className="header__icon" alt="RubiconMD icon"/>
           RubiconMD Retro
         </h1>
 
