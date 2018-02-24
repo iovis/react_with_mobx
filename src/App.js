@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Board from './components/Board';
 import CardList from './components/CardList';
 import Header from './components/Header';
