@@ -1,6 +1,7 @@
 .card {
   background-color: #ffe30e;
   border: 1px solid #ffb04c;
+  box-sizing: border-box;
   cursor: move;
   padding: 1rem;
   position: absolute;
